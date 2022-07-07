@@ -1,5 +1,6 @@
 import { Produtos } from "./styles";
 import styled from "styled-components";
+import {GoPlus, GoDash} from "react-icons/go"
 
 
 
@@ -18,8 +19,8 @@ export default function itemCarrinho({produto}){
           </div>
           <div className="buttonQuant">
             <div>
-              <Button cor="green"></Button>
-              <Button cor="red"></Button>
+              <Button cor="green"><GoPlus/></Button>
+              <Button cor="red"><GoDash/></Button>
             </div>
             Qtd.: {item.quantidade}
           </div>
@@ -82,5 +83,12 @@ const Button = styled.button`
     width: 40%;
     height: 80%;
     background-color: ${props=>props.cor};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+      height:80%;
+      color: white;
+    }
 `
 

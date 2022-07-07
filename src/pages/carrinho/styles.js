@@ -1,30 +1,10 @@
 import styled from "styled-components";
 
-const Header = styled.header`
-  display: flex;
-  height: 70px;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  background-color: #fdc500;
 
-`
-const Footer = styled.header`
-  display: flex;
-  height: 70px;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  background-color: #fdc500;
-
-`
 
 const Content = styled.div`
   margin:70px 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,4 +25,4 @@ const Produtos = styled.div`
 
 
 
-export {Content, Header, Footer, Produtos};
+export {Content, Produtos};

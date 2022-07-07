@@ -2,16 +2,19 @@
 import { useState, useEffect } from "react";
 import ItemCarrinho from './itemCarrinho';
 import ItemsValores from './itemValores';
-import { Content, Header, Footer } from "./styles";
+import { Content } from "./styles";
 import axios from "axios";
 
 function Home() {
   const [produto, setProduto] = useState();
+  const [valor, setValor] = useState();
 
   useEffect(()=>{
-    axios.get("http://localhost:5000/produtos")
+    axios.get("https://hardstore0.herokuapp.com/produtos")
         .then(response =>{
-          setProduto(response.data);
+          console.log(response)
+          setProduto(response.data.produtos);
+          setValor(response.data.valor);
         })
   }, [])
 
@@ -19,10 +22,8 @@ function Home() {
 
   return (
     <Content>
-      <Header />
       <ItemCarrinho produto={produto}/>
-      <ItemsValores produto={produto}/>
-      <Footer />
+      <ItemsValores produto={produto} valor={(valor.toFixed(2))}/>
     </Content>
   );
 }

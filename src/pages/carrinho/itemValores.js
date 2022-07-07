@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 
-export default function itemCarrinho({produto}){
+export default function itemsValores({produto, valor}){
 
 
     const produtos = (produto )? (produto.map((item, index)=>{
@@ -15,9 +15,12 @@ export default function itemCarrinho({produto}){
         </Produto>)
     })):("Nenhum item encontrado");
 
+    const Total = (valor)?<span>{valor} R$</span>:""
+
     return (
         <Items>
-          {produtos}
+          <div className="separador">{produtos}</div>
+          <div className="total">Total{Total}</div>
       </Items>
 
     )
@@ -48,8 +51,22 @@ const Items = styled.div`
   height: 40%;
   width: 80%;
   background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: solid 2px black;
   padding: 10px 30px;
-  overflow: auto;
   margin-bottom: 10px;
+
+  .separador{
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+  }
+
+  .total{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
 `
