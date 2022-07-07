@@ -49,13 +49,13 @@ const Produto = styled.div`
 
 const Items = styled.div`
   height: 40%;
-  width: 80%;
+  width: 100%;
   background-color: #ededed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: solid 2px black;
-  padding: 10px 30px;
+  padding: 10px;
   margin-bottom: 10px;
 
   .separador{

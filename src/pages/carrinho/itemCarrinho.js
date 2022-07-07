@@ -55,6 +55,12 @@ const Produto = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    span:first-child{
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .buttonQuant{
