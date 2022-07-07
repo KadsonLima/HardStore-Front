@@ -9,7 +9,7 @@ function Home() {
   const [produto, setProduto] = useState();
 
   useEffect(()=>{
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:5000/produtos")
         .then(response =>{
           setProduto(response.data);
         })
