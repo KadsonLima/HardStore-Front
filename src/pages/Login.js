@@ -137,7 +137,7 @@ h3{
 export const Form = styled.div`
 margin-left: 7vw;
 `
-const Logo = styled.div`
+export const Logo = styled.div`
 display: flex;
 justify-content: space-around;
 align-items: flex-end;
