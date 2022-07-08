@@ -1,13 +1,25 @@
 import { Produtos } from "./styles";
 import styled from "styled-components";
 import {GoPlus, GoDash} from "react-icons/go"
+import { useState } from "react";
+import axios from "axios";
 
 
-
-export default function itemCarrinho({produto}){
-    console.log("produto do carrin", produto)
-
+export default function itemCarrinho({produto, token}){
+    console.log("produto do carrin", produto);
+    console.log("esse é o token", token)
     const produtos = (produto )? (produto.map((item, index)=>{
+    
+
+      const [qtd, setQtd] = useState(item.qtd)
+
+      function atualizarQuantidade(tipo){
+        if(tipo === -1 && qtd === 0) return;
+        setQtd(qtd+tipo)
+        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token)
+
+      }
+
       return ( 
         <Produto key={index}>
           <div>
@@ -19,10 +31,10 @@ export default function itemCarrinho({produto}){
           </div>
           <div className="buttonQuant">
             <div>
-              <Button cor="green"><GoPlus/></Button>
-              <Button cor="red"><GoDash/></Button>
+              <Button cor="green" onClick={()=>{atualizarQuantidade(+1)}}><GoPlus/></Button>
+              <Button cor="red" onClick={()=>{atualizarQuantidade(-1)}}><GoDash/></Button>
             </div>
-            Qtd.: {item.quantidade}
+            Qtd.: {item.qtd}
           </div>
         </Produto>)
      })):("Nenhum item encontrado");
@@ -86,15 +98,22 @@ const Produto = styled.div`
 `
 
 const Button = styled.button`
-    width: 40%;
+    width: 30%;
     height: 80%;
     background-color: ${props=>props.cor};
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
     svg{
       height:80%;
       color: white;
+    }
+    &&:active{
+      filter: opacity(0.1);
+    }
+    &&:hover{
+      opacity: 0.5;
     }
 `
 

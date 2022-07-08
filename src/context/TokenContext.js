@@ -4,7 +4,7 @@ export const TokenContext = createContext();
 
 export default function TokenProvider({children}){
     const [token , setToken] = useState(null);
-    const header = (token)&&{'headers':{'Authorization':`Bearer ${token.token}`, id:token._id}};
+    const header = (token)&&{'headers':{'Authorization':`Bearer ${token}`}};
 
     return (
         <TokenContext.Provider value={{token, setToken, header}}>
