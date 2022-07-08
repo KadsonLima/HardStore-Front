@@ -37,7 +37,7 @@ export default function Cadastro(){
             }
 
         let promise = axios.post(
-        "https://mywallet010.herokuapp.com/sign-up"
+        "https://hardstore0.herokuapp.com/sign-up"
         ,body)
         promise.then((response => {    
             console.log(response)
