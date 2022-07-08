@@ -9,7 +9,7 @@ export default createGlobalStyle`
     }
 
     body{
-        background-color: #ecf0f5;
+        background-color: #fdc500;
         font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
     }
 
