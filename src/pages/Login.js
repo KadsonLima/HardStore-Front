@@ -31,7 +31,7 @@ export default function Login(){
         let promise = axios.post("https://hardstore0.herokuapp.com/sign-in", body)
         promise.then((response => {
             setToken(response.data)
-            navigate("/wallet")
+            navigate("/produtos")
             
             
           }))
