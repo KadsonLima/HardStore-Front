@@ -8,7 +8,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 170px);
+  height: calc(100vh - 140px);
   gap: 10px;
 `;
 

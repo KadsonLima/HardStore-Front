@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 
-export default function itemsValores({produto}){
+export default function itemsValores({produto, setValor}){
     let saldoTotal = 0;
 
     const produtos = (produto )? (produto.map((item, index)=>{
@@ -18,6 +18,8 @@ export default function itemsValores({produto}){
     })):("Nenhum item encontrado");
 
     const Total = <span>{saldoTotal.toFixed(2)} R$</span>
+
+    setValor(saldoTotal)
 
     return (
         <Items>

@@ -6,7 +6,6 @@ import axios from "axios";
 
 
 export default function itemCarrinho({produto, token, setValor}){
-    console.log("produto do carrin", produto.produtosEstoque);
     console.log("esse é o token", token)
     const produtos = (produto )? (produto.map((item, index)=>{
     
@@ -14,9 +13,13 @@ export default function itemCarrinho({produto, token, setValor}){
       const [qtd, setQtd] = useState(item.qtd)
 
       function atualizarQuantidade(tipo){
-        if(tipo === -1 && qtd === 0) return;
-        setQtd(qtd+tipo)
-        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token)
+        if(tipo === -1 && qtd === 0){
+          axios.delete(`http://localhost:5000/cart/`, {"id":item._id}, token);
+        };
+
+        (tipo === 1)?setQtd(qtd+1):setQtd(qtd-1);
+
+        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token);
         setValor(+1)
       }
 
@@ -31,8 +34,8 @@ export default function itemCarrinho({produto, token, setValor}){
           </div>
           <div className="buttonQuant">
             <div>
-              <Button cor="green" onClick={()=>{atualizarQuantidade(+1)}}><GoPlus/></Button>
-              <Button cor="red" onClick={()=>{atualizarQuantidade(-1)}}><GoDash/></Button>
+              <Button cor="green" onClick={()=>{atualizarQuantidade(1)}}><GoPlus/></Button>
+              <Button cor="red" onClick={()=>{atualizarQuantidade(2)}}><GoDash/></Button>
             </div>
             Qtd.: {item.qtd}
           </div>
