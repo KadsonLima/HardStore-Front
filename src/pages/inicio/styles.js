@@ -8,14 +8,14 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 140px);
+  height: 100vh;
   gap: 10px;
 `;
 
 const Produtos = styled.div`
   margin: 20px 0;
   width: 100%;
-  height: 60%;
+  height: 90%;
   background-color: white;
   border: solid 2px black;
   overflow: auto;

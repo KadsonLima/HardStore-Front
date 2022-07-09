@@ -1,10 +1,9 @@
 //import { Link } from "react-router-dom";
 import { useState, useEffect, useContext} from "react";
-import ItemCarrinho from "./itemCarrinho";
-import ItemsValores from "./itemValores";
+import ItemCarrinho from "./produtoStore";
 import { Content } from "./styles";
 import { TokenContext } from "../../context/TokenContext";
-import { Footer } from "../../components/Footer/Footer";
+import { Footer } from "../../components/Footer.js";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 
@@ -21,7 +20,7 @@ function Home() {
       navigate("/")
     }
 
-    (token && header)&& axios.get("https://hardstore0.herokuapp.com/cart", header).then((response) => {
+    (token && header)&& axios.get("http://localhost:5000/produtos", header).then((response) => {
       console.log(response);
       setProduto(response.data);
     });
@@ -33,9 +32,8 @@ function Home() {
     return (<>
       <Content>
         <ItemCarrinho produto={produto} token={header} setValor={setValor}/>
-        <ItemsValores produto={produto} valor={valor.toFixed(2)} setValor={setValor}/>
       </Content>
-      <Footer valor={valor} rota="/checkout" texto="Finalizar Compra"/></>
+      <Footer valor={valor} rota="/carrinho" texto="Carrinho de Compras"/></>
     );
   }
 }

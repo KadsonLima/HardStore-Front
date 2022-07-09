@@ -1,27 +1,32 @@
 //import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Pagamento from "./formaPagamento";
 import { Content } from "./styles";
+import { TokenContext } from "../../context/TokenContext";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 function Home() {
   const [produto, setProduto] = useState();
-  const [valor, setValor] = useState();
-
+  const {token, header, valor} = useContext(TokenContext);
+  const navigate = useNavigate();
+ 
   useEffect(() => {
-    axios.get("https://hardstore0.herokuapp.com/produtos").then((response) => {
+    if(!token){
+      navigate("/")
+    }
+
+    (token && header)&& axios.get("http://localhost:5000/cart", header).then((response) => {
       console.log(response);
-      setProduto(response.data.produtos);
-      setValor(response.data.valor);
+      setProduto(response.data);
     });
   }, []);
 
-  console.log("produtos", produto);
 
-  if (produto && valor) {
+  if (produto) {
     return (
       <Content>
-        <Pagamento/>
+        <Pagamento produto={produto} valor={valor}/>
       </Content>
     );
   }

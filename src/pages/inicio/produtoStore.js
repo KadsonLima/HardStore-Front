@@ -1,6 +1,6 @@
 import { Produtos } from "./styles";
 import styled from "styled-components";
-import {GoPlus, GoDash} from "react-icons/go"
+import {BsFillCartFill} from "react-icons/bs"
 import { useState } from "react";
 import axios from "axios";
 
@@ -12,15 +12,9 @@ export default function itemCarrinho({produto, token, setValor}){
 
       const [qtd, setQtd] = useState(item.qtd)
 
-      function atualizarQuantidade(tipo){
-        if(tipo === -1 && qtd === 0){
-          axios.delete(`http://localhost:5000/cart/`, {"id":item._id}, token);
-        };
-
-        (tipo === 1)?setQtd(qtd+1):setQtd(qtd-1);
-
-        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token);
-        setValor(+1)
+      function addItem(tipo){
+          console.log(item)
+          axios.post(`http://localhost:5000/cart/`, {item,"qtd":1}, token);
       }
 
       return ( 
@@ -34,10 +28,9 @@ export default function itemCarrinho({produto, token, setValor}){
           </div>
           <div className="buttonQuant">
             <div>
-              <Button cor="green" onClick={()=>{atualizarQuantidade(1)}}><GoPlus/></Button>
-              <Button cor="red" onClick={()=>{atualizarQuantidade(2)}}><GoDash/></Button>
+              <Button onClick={()=>{addItem(item)}}><BsFillCartFill/></Button>
             </div>
-            Qtd.: {item.qtd}
+            Disponivel.: {item.quantidade}
           </div>
         </Produto>)
      })):("Nenhum item encontrado");
@@ -102,21 +95,17 @@ const Produto = styled.div`
 
 const Button = styled.button`
     width: 30%;
-    height: 80%;
-    background-color: ${props=>props.cor};
+    height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
     svg{
-      height:80%;
-      color: white;
+      width: 100%;
+      height: 100%;
+      color: black;
+      cursor: pointer;
     }
-    &&:active{
-      filter: opacity(0.1);
-    }
-    &&:hover{
-      opacity: 0.5;
-    }
+    
 `
 

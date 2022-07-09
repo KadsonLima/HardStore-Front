@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 
-export default function Pagamento({produto}){
+export default function Pagamento({produto, valor}){
     console.log("produto do carrin", produto)
 
     const produtos = (produto )? (
@@ -28,7 +28,7 @@ export default function Pagamento({produto}){
           </div>
           <Pagar>
             <span>TOTAL</span>
-            <span>300.00 R$</span>
+            <span>{valor} R$</span>
           </Pagar>
       </FormaPagamento>
 
