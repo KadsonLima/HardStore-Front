@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 
-export default function itemsValores({produto, valor}){
+export default function itemsValores({produto}){
     let saldoTotal = 0;
 
     const produtos = (produto )? (produto.map((item, index)=>{
