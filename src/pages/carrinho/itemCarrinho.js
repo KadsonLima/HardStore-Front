@@ -5,8 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 
 
-export default function itemCarrinho({produto, token}){
-    console.log("produto do carrin", produto);
+export default function itemCarrinho({produto, token, setValor}){
+    console.log("produto do carrin", produto.produtosEstoque);
     console.log("esse é o token", token)
     const produtos = (produto )? (produto.map((item, index)=>{
     
@@ -17,7 +17,7 @@ export default function itemCarrinho({produto, token}){
         if(tipo === -1 && qtd === 0) return;
         setQtd(qtd+tipo)
         axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token)
-
+        setValor(+1)
       }
 
       return ( 

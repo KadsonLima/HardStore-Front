@@ -25,14 +25,14 @@ function Home() {
       setProduto(response.data);
       setValor(32);
     });
-  }, []);
+  }, [valor]);
 
   console.log("produtos", produto);
 
   if (produto && valor) {
     return (
       <Content>
-        <ItemCarrinho produto={produto} token={header}/>
+        <ItemCarrinho produto={produto} token={header} setValor={setValor}/>
         <ItemsValores produto={produto} valor={valor.toFixed(2)} />
       </Content>
     );
