@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 export default function itemCarrinho({produto, token}){
-    console.log("produto do carrin", produto);
+    console.log("produto do carrin", produto.produtosEstoque);
     console.log("esse é o token", token)
     const produtos = (produto )? (produto.map((item, index)=>{
     

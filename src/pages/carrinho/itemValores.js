@@ -3,19 +3,21 @@ import styled from "styled-components";
 
 
 export default function itemsValores({produto, valor}){
-
+    let saldoTotal = 0;
 
     const produtos = (produto )? (produto.map((item, index)=>{
+        saldoTotal += (item.qtd * parseFloat(item.preco))
+
      return ( <Produto key={index}>
           <div className="name">
-            <span>{item.quantidade}</span>
+            <span>{item.qtd}</span>
             <span>{item.nome}</span>
           </div>
           <span>{item.preco} R$</span>
         </Produto>)
     })):("Nenhum item encontrado");
 
-    const Total = (valor)?<span>{valor} R$</span>:""
+    const Total = <span>{saldoTotal.toFixed(2)} R$</span>
 
     return (
         <Items>
