@@ -12,6 +12,10 @@ export function Footer({rota, validade, validarPagamento, texto, token}){
             validarPagamento(true)
             alert("PAGAMENTO EFETUADO")
             axios.post("http://localhost:5000/compras",{}, token)
+                .then(response =>{
+                    console.log(response);
+                    navigate("/inicio")
+                })
         }else{
             alert("PAGAMENTO NAO APROVADO")
         }
