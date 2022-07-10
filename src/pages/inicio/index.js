@@ -3,7 +3,7 @@ import { useState, useEffect, useContext} from "react";
 import ItemCarrinho from "./produtoStore";
 import { Content } from "./styles";
 import { TokenContext } from "../../context/TokenContext";
-import { Footer } from "../../components/Footer.js";
+import { Footer } from "../../components/Footer/Footer.js";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 

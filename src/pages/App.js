@@ -3,7 +3,7 @@ import Carrinho from "./carrinho";
 import Checkout from "./checkout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {Header} from '../components/Header/Header';
-import {Footer} from '../components/Footer/Footer';
+import Inicio from './inicio';
 import TokenProvider from "../context/TokenContext";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
@@ -20,6 +20,7 @@ function App() {
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/carrinho" element={<><Header/><Carrinho /></>} />
           <Route path="/checkout" element={<><Header/><Checkout /></>} />
+          <Route path="/inicio" element={<><Header/><Inicio /></>} />
         </Routes>
       </TokenProvider>
     </BrowserRouter>
