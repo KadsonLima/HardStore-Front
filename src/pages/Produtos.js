@@ -4,16 +4,22 @@ import axios from "axios";
 import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
 import { TokenContext } from "../context/TokenContext";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Produtos(){ 
-  const {header} = useContext(TokenContext);
+  const {header, token} = useContext(TokenContext);
   console.log("SHAUSHAU", header)
   const [produtos, setProdutos] = useState();
   const [valor, setValor] = useState();
+  const navigate = useNavigate();
 
   useEffect(()=>{
+    if(!token){
+      navigate("/")
+    }
+
     axios.get("http://localhost:5000/produtos", header)
         .then(response =>{
           console.log(response.data)
