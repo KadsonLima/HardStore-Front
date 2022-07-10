@@ -1,13 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from 'axios';
 
-export function Footer(props){
+export function Footer({rota, validade, validarPagamento, texto, token}){
     const navigate = useNavigate()
-    console.log("ROTA", props)
+    function rotaPagamento(){
+        if(rota){
+            navigate(rota);
+            return;
+        }else if(validade){
+            validarPagamento(true)
+            alert("PAGAMENTO EFETUADO")
+            axios.post("http://localhost:5000/compras",{}, token)
+        }else{
+            alert("PAGAMENTO NAO APROVADO")
+        }
+    }
 
     return (
         <Container>
-            <Buttom onClick={()=>{navigate(props.rota)}}>{props.texto}</Buttom>
+            <Buttom onClick={()=>rotaPagamento()}>{texto}</Buttom>
         </Container>
     )
 }
