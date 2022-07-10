@@ -7,6 +7,7 @@ import {Footer} from '../components/Footer/Footer';
 import TokenProvider from "../context/TokenContext";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
+import Produtos from "./Produtos";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/carrinho" element={<><Header/><Carrinho /></>} />
           <Route path="/checkout" element={<><Header/><Checkout /></>} />
+          <Route path="/produtos" element={<Produtos />} />
         </Routes>
       </TokenProvider>
     </BrowserRouter>

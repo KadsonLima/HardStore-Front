@@ -28,13 +28,11 @@ export default function Login(){
             email:email,
             password:senha
         }
-        let promise = axios.post("http://localhost:5000/sign-in", body)
+        let promise = axios.post("https://hardstore0.herokuapp.com/sign-in", body)
         promise.then((response => {
             console.log("token", token)
             setToken(response.data)
             navigate("/produtos")
-            
-            
           }))
           promise.catch((response => {
           alert(`Falha no login.Verifique seu usario e senha ${response}`)
