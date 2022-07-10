@@ -20,7 +20,7 @@ export default function Produtos(){
       navigate("/")
     }
 
-    axios.get("http://localhost:5000/produtos", header)
+    axios.get("https://hardstore0.herokuapp.com/produtos", header)
         .then(response =>{
           console.log(response.data)
           setProdutos(response.data);
