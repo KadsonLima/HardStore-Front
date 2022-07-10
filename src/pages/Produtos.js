@@ -3,7 +3,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
-import { TokenContext } from '../context/TokenContext';
+
+import { TokenContext } from "../context/TokenContext";
+import { useNavigate } from "react-router-dom";
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -42,17 +44,22 @@ import { TokenContext } from '../context/TokenContext';
     )
 }
 export default function Produtos(){ 
+  const {header, token} = useContext(TokenContext);
+  console.log("SHAUSHAU", header)
   const [produtos, setProdutos] = useState();
-  const {token, header} = useContext(TokenContext)
-
-  
+  const [valor, setValor] = useState();
+  const navigate = useNavigate();
 
   useEffect(()=>{
+    if(!token){
+      navigate("/")
+    }
 
     axios.get("http://localhost:5000/produtos",header)
         .then(response =>{
-          console.log(response)
-          setProdutos(response.data)
+          console.log(response.data)
+          setProdutos(response.data);
+          setValor(response.data.valor)
         })
   }, [])
 
@@ -70,6 +77,7 @@ export default function Produtos(){
     </div>
      </Header>
     <Container>
+
      {produtos?.map(((item, index)=>{
       return ( 
         <Produto key={index} item = {item}>

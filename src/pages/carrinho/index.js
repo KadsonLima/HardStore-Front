@@ -20,7 +20,7 @@ function Home() {
       navigate("/")
     }
 
-    (token && header)&& axios.get("http://localhost:5000/cart", header).then((response) => {
+    (token && header)&& axios.get("https://hardstore0.herokuapp.com/cart", header).then((response) => {
       console.log(response);
       setProduto(response.data);
       setValor(32);

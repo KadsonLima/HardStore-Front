@@ -32,6 +32,7 @@ export default function Login(){
         let promise = axios.post("http://localhost:5000/sign-in", body)
         promise.then((response => {
             setToken(response.data)
+            console.log("token", response.data)
             navigate("/produtos")  
           }))
           promise.catch((response => {
