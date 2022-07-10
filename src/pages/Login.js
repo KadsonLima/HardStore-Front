@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate, } from "react-router-dom";
 import { TokenContext } from '../context/TokenContext';
@@ -28,7 +28,8 @@ export default function Login(){
             email:email,
             password:senha
         }
-        let promise = axios.post("https://hardstore0.herokuapp.com/sign-in", body)
+        console.log(body)
+        let promise = axios.post("http://localhost:5000/sign-in", body)
         promise.then((response => {
             setToken(response.data)
             console.log("token", response.data)
