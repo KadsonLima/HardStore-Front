@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function itemCarrinho({produto, token, setValor}){
     console.log("esse é o token", token)
-    const produtos = (produto )? (produto.map((item, index)=>{
+    const produtos = (produto.item )? (produto.item.map((item, index)=>{
     
 
       const [qtd, setQtd] = useState(item.qtd)

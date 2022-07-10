@@ -32,7 +32,7 @@ export default function Login(){
         promise.then((response => {
             console.log("token", token)
             setToken(response.data)
-            navigate("/carrinho")
+            navigate("/produtos")
             
             
           }))
