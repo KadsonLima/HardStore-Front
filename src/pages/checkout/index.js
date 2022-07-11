@@ -22,7 +22,7 @@ function Home() {
     (token && header)&& axios.get("https://hardstore0.herokuapp.com/cart", header).then((response) => {
       console.log(response);
     });
-  }, []);
+  }, [header, navigate, token]);
 
   console.log("ROTA", loadPay)
 

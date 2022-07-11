@@ -45,7 +45,9 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  
+  margin-bottom: 30px;
+  background-color: #808080;
+  padding: 10px 0;
   div:first-child{
     background-color: gray;
   }

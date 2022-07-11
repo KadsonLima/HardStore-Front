@@ -1,26 +1,31 @@
 import { Produtos } from "./styles";
 import styled from "styled-components";
 import {GoPlus, GoDash} from "react-icons/go"
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
 
 
 export default function itemCarrinho({produto, token, setValor}){
-    console.log("esse é o token", token)
+    const { headers} = token
     const produtos = (produto )? (produto.map((item, index)=>{
     
 
       const [qtd, setQtd] = useState(item.qtd)
 
       function atualizarQuantidade(tipo){
-        if(tipo === -1 && qtd === 0){
-          axios.delete(`http://localhost:5000/cart/`, {"id":item._id}, token);
-        };
+        if(tipo === 2 && qtd <= 0){
+          axios.delete(`https://hardstore0.herokuapp.com/cart/`, {data:{"id":item._id, headers}});
+          console.log("teste", token)
+          setValor(+1)
 
+          return;
+          
+        }else{
         (tipo === 1)?setQtd(qtd+1):setQtd(qtd-1);
-
-        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token);
         setValor(+1)
+
+        axios.put(`https://hardstore0.herokuapp.com/cart/`, {"id":item._id,"qtd":qtd}, token);
+        }
       }
 
       return ( 
@@ -40,7 +45,7 @@ export default function itemCarrinho({produto, token, setValor}){
             Qtd.: {item.qtd}
           </div>
         </Produto>)
-     })):("Nenhum item encontrado");
+     })):(<Produto>"Nenhum item encontrado"</Produto>);
 
     return (
         <Produtos>

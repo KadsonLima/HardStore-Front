@@ -7,6 +7,7 @@ import TokenProvider from "../context/TokenContext";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
 import Produtos from "./Produtos";
+import Finalizar from "./Finalizar";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/carrinho" element={<><Header/><Carrinho /></>} />
-          <Route path="/cadastro" element={<><Header/><Cadastro /></>} />
+          <Route path="/finalizar" element={<Finalizar />} />
+          <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/checkout" element={<><Header/><Checkout /></>} />
           <Route path="/produtos" element={<Produtos />} />
         </Routes>

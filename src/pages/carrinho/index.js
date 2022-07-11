@@ -7,12 +7,12 @@ import { TokenContext } from "../../context/TokenContext";
 import { Footer } from "../../components/Footer/Footer";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import styled from "styled-components";
 
 
 function Home() {
   const {token, header, valor, setValor} = useContext(TokenContext);
   const [produto, setProduto] = useState();
-  const [rota, setRota] = useState();
   const navigate = useNavigate()
 
 
@@ -21,7 +21,7 @@ function Home() {
       navigate("/")
     }
 
-    (token && header)&& axios.get("http://localhost:5000/cart", header).then((response) => {
+    (token && header)&& axios.get("https://hardstore0.herokuapp.com/cart", header).then((response) => {
       console.log("respoadsa", response);
       setProduto(response.data);
     });
@@ -37,7 +37,24 @@ function Home() {
       </Content>
       <Footer valor={valor} rota="/checkout" texto="Finalizar Compra"/></>
     );
+  }else{
+    return (<>
+      <Content>
+        <NenhumItem>Nenhum Item na Lista de Compras</NenhumItem>
+      </Content>
+      <Footer valor={valor} rota="/checkout" texto="Finalizar Compra"/></>
+    );
   }
 }
 
 export default Home;
+
+const NenhumItem = styled.div`
+  width: 100%;
+  height: calc(100% - 140px);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`

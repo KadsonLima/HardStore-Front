@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from '../context/TokenContext';
@@ -11,7 +11,7 @@ export default function Login(){
     const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
     const [disabled, setDisabled] = useState(false)
-    const {token, setToken} = useContext(TokenContext)
+    const {setToken} = useContext(TokenContext)
     const [botao, setBotao] = useState("Entrar")
     const [colorButton, setColorButton] = useState("#003f88");
     const [colorInput, setColorInput] = useState("black");
@@ -29,7 +29,7 @@ export default function Login(){
             password:senha
         }
         console.log(body)
-        let promise = axios.post("http://localhost:5000/sign-in", body)
+        let promise = axios.post("https://hardstore0.herokuapp.com/sign-in", body)
         promise.then((response => {
             setToken(response.data)
             console.log("token", response.data)
@@ -81,6 +81,20 @@ height: 100vh;
 width: 100vw;
 padding-bottom: 50px;
 position: relative;
+button{
+display: flex;
+align-items: center;
+justify-content: center;
+height: 45px;
+width: 85vw;
+border-radius: 5px;
+color: white;
+font-weight: bold;
+background-color: ${props => props.colorButton} ;
+border: none;
+font-family: 'Raleway', sans-serif;
+font-size: 20px;
+}
 img{
     height: auto;
     width: 200px;
@@ -100,20 +114,6 @@ background-color: #ffffff;
     color: black;
 }
 }
-button{
-display: flex;
-align-items: center;
-justify-content: center;
-height: 45px;
-width: 85vw;
-border-radius: 5px;
-color: white;
-font-weight: bold;
-background-color: ${props => props.colorButton} ;
-border: none;
-font-family: 'Raleway', sans-serif;
-font-size: 20px;
-}
 
 h1{
     font-family: 'Secular One', sans-serif;
@@ -121,7 +121,7 @@ h1{
     color: #003f88;
     margin-bottom: 30px;
 }
-h2, h3{
+h2, h3, h4{
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     color: #003f88;
@@ -131,6 +131,11 @@ h2, h3{
 h3{
     font-size: 25px;
     margin-top: 5px;
+    text-decoration: none;
+}
+h4{
+    font-size: 20px;
+    margin-bottom: 20px;
     text-decoration: none;
 }
 ` 

@@ -69,21 +69,3 @@ const FormaPagamento = styled.div`
   }
 `
 
-const Choice = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 60px;
-    width: 80%;
-    img{
-      width: 60px;
-      object-fit: cover;
-    }
-    &&:hover{
-      background-color: green;
-      color: white;
-    }
-    span{
-      font-weight: 700;
-    }
-`
