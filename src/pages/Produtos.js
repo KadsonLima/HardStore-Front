@@ -97,8 +97,8 @@ export default function Produtos(){
         }))}
 
     </Container>
-    <Footer>
-    <button onClick={()=> navigate("/cart")}></button>
+    <Footer texto={`Ir para o carrinho`} rota={`/produtos`}>
+    
      </Footer>
     </React.Fragment>
   );

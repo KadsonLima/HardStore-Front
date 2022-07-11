@@ -5,6 +5,9 @@ import axios from 'axios';
 export default function Footer({rota, validade, validarPagamento, texto, token}){
     const navigate = useNavigate()
     function rotaPagamento(){
+        if(rota === "/produtos"){
+            return  navigate("/carrinho")
+        }
         if(rota){
             navigate(rota);
             return;
@@ -16,7 +19,7 @@ export default function Footer({rota, validade, validarPagamento, texto, token})
                     console.log(response);
                     navigate("/inicio")
                 })
-        }else{
+            }else{
             alert("PAGAMENTO NAO APROVADO")
         }
     }
