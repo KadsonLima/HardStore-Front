@@ -7,16 +7,33 @@ import { TokenContext } from '../context/TokenContext';
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer/Footer";
 
- function Produto({item}){
+ function Produto({item, pesquisa}){
     const [selected, setSelected] = useState(false)
     const {token, header} = useContext(TokenContext)
+    const [displayit, setDisplayit] = useState(true)
+    
+    
+    useEffect(() => {
+      
+      if(pesquisa){
+        console.log(pesquisa)
+        let nomeContem = (item.nome.toLowerCase()).includes(pesquisa)
+        let descricaoContem = (item.description.toLowerCase()).includes(pesquisa)
+        if( !nomeContem && !descricaoContem){
+          setDisplayit(false)
+        }
+        }else{
+        setDisplayit(true)
+        }  
+    },[pesquisa,item]);
+      
   function adicionarAoCarrinho(id){
     let body={
         id: id
         }
     if(selected){
     setSelected(false)
-    axios.put("https://hardstore0.herokuapp.com/cart", body, header)
+    axios.put("http://localhost:5000/deletecart", body, header )
           .then(response =>{
             console.log(response)
         })
@@ -24,14 +41,14 @@ import { Footer } from "../components/Footer/Footer";
     }else{
      setSelected(true)
     
-     axios.post("https://hardstore0.herokuapp.com/cart", body, header)
+     axios.post("http://localhost:5000/cart", body, header)
           .then(response =>{
       console.log(response)
   })
      }
     }
     return(
-        <Item selected= {selected}>
+        <Item selected= {selected} displayit = {displayit}>
         <div>
             <img src={item.imagem} alt={item.nome}/>
               <h2>R$ {item.preco}</h2>
@@ -48,31 +65,12 @@ export default function Produtos(){
   const [pesquisa, setPesquisa] = useState();
   const {token, header} = useContext(TokenContext)
   const navigate = useNavigate()
-
-    function pesquisar(search){
-        if(search){
-         
-        let aux = produtos.filter(e=>{
-                const {nome, description} = e;
-                if((nome.toLowerCase()).includes(search) || (description.toLowerCase()).includes(search) ){
-                    return e;
-                }
-            })
-            setPesquisa(aux)
-        }else{
-            setPesquisa(produtos)
-        }
-        
-    }
-
-
   useEffect(()=>{
 
-    axios.get("https://hardstore0.herokuapp.com/produtos",header)
+    axios.get("http://localhost:5000/produtos",header)
         .then(response =>{
           console.log(response)
           setProdutos(response.data)
-          setPesquisa(response.data)
         })
   }, [])
 
@@ -86,13 +84,13 @@ export default function Produtos(){
     </div>
     <div>
     <ion-icon name="search-outline"></ion-icon>
-    <input onChange={e => pesquisar(e.target.value)}></input>
+    <input onChange={e => setPesquisa(e.target.value)}></input>
     </div>
      </Header>
     <Container>
-     {pesquisa?.map(((item, index)=>{
+     {produtos?.map(((item, index)=>{
       return ( 
-        <Produto key={index} item = {item}>
+        <Produto key={index} item = {item} pesquisa={pesquisa}>
         </Produto>)
         }))}
 
@@ -142,7 +140,7 @@ width: 300px;
 
 
 const Item = styled.div`
-  display: flex;
+  display: ${props => props.displayit? "flex": "none" };
   margin-bottom: 10px;
   min-height: 18vh;
   width: 100vw;

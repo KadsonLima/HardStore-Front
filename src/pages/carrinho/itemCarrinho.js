@@ -14,12 +14,12 @@ export default function itemCarrinho({produto, token, setValor}){
 
       function atualizarQuantidade(tipo){
         if(tipo === -1 && qtd === 0){
-          axios.delete(`https://hardstore0.herokuapp.com/cart/`, {"id":item._id}, token);
+          axios.delete(`http://localhost:5000/cart/`, {"id":item._id}, token);
         };
 
         (tipo === 1)?setQtd(qtd+1):setQtd(qtd-1);
 
-        axios.put(`https://hardstore0.herokuapp.com/cart/`, {"id":item._id,"qtd":qtd}, token);
+        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token);
         setValor(+1)
       }
 
