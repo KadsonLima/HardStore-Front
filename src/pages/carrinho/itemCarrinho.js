@@ -16,7 +16,7 @@ export default function itemCarrinho({produto, token, setValor}){
       function atualizarQuantidade(tipo){
         if(tipo === -1 && qtd === 0) return;
         setQtd(qtd+tipo)
-        axios.put(`http://localhost:5000/cart/`, {"id":item._id,"qtd":qtd}, token)
+        axios.put(`https://hardstore0.herokuapp.com/cart/`, {"id":item._id,"qtd":qtd}, token)
         setValor(+1)
       }
 

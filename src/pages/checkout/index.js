@@ -9,7 +9,7 @@ function Home() {
   const [valor, setValor] = useState();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/produtos").then((response) => {
+    axios.get("https://hardstore0.herokuapp.com/produtos").then((response) => {
       console.log(response);
       setProduto(response.data.produtos);
       setValor(response.data.valor);
