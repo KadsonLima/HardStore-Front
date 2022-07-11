@@ -13,7 +13,7 @@ function App() {
       <GlobalStyle />
       <TokenProvider>
         <Routes>
-          <Route path="/carrinho" element={<Carrinho />} />
+          <Route path="/cart" element={<Carrinho />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
