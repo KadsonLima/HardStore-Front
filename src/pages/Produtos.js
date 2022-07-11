@@ -6,6 +6,7 @@ import imglogo from "../assets/imglogo.png"
 
 import { TokenContext } from "../context/TokenContext";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "../components/Footer/Footer";
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -16,7 +17,7 @@ import { useNavigate } from "react-router-dom";
         }
     if(selected){
     setSelected(false)
-    axios.putg("http://localhost:5000/cart", body, header)
+    axios.putg("https://hardstore0.herokuapp.com/cart", body, header)
           .then(response =>{
             console.log(response)
         })
@@ -24,7 +25,7 @@ import { useNavigate } from "react-router-dom";
     }else{
      setSelected(true)
     
-     axios.post("http://localhost:5000/cart", body, header)
+     axios.post("https://hardstore0.herokuapp.com/cart", body, header)
           .then(response =>{
       console.log(response)
   })
@@ -55,7 +56,7 @@ export default function Produtos(){
       navigate("/")
     }
 
-    axios.get("http://localhost:5000/produtos",header)
+    axios.get("https://hardstore0.herokuapp.com/produtos",header)
         .then(response =>{
           console.log(response.data)
           setProdutos(response.data);
@@ -85,6 +86,7 @@ export default function Produtos(){
         }))}
 
     </Container>
+    <Footer  rota="/carrinho" texto="Carrinho de Compras"/>
     </React.Fragment>
   );
 }
