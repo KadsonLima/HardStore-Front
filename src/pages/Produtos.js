@@ -4,6 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
 import { TokenContext } from '../context/TokenContext';
+import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer.js"
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -14,7 +16,7 @@ import { TokenContext } from '../context/TokenContext';
         }
     if(selected){
     setSelected(false)
-    axios.putg("http://localhost:5000/cart", body, header)
+    axios.put("http://localhost:5000/cart", body, header)
           .then(response =>{
             console.log(response)
         })
@@ -43,9 +45,26 @@ import { TokenContext } from '../context/TokenContext';
 }
 export default function Produtos(){ 
   const [produtos, setProdutos] = useState();
+  const [pesquisa, setPesquisa] = useState();
   const {token, header} = useContext(TokenContext)
+  const navigate = useNavigate()
 
-  
+    function pesquisar(search){
+        if(search){
+         
+        let aux = produtos.filter(e=>{
+                const {nome, description} = e;
+                if((nome.toLowerCase()).includes(search) || (description.toLowerCase()).includes(search) ){
+                    return e;
+                }
+            })
+            setPesquisa(aux)
+        }else{
+            setPesquisa(produtos)
+        }
+        
+    }
+
 
   useEffect(()=>{
 
@@ -53,6 +72,7 @@ export default function Produtos(){
         .then(response =>{
           console.log(response)
           setProdutos(response.data)
+          setPesquisa(response.data)
         })
   }, [])
 
@@ -66,17 +86,20 @@ export default function Produtos(){
     </div>
     <div>
     <ion-icon name="search-outline"></ion-icon>
-    <input></input>
+    <input onChange={e => pesquisar(e.target.value)}></input>
     </div>
      </Header>
     <Container>
-     {produtos?.map(((item, index)=>{
+     {pesquisa?.map(((item, index)=>{
       return ( 
         <Produto key={index} item = {item}>
         </Produto>)
         }))}
 
     </Container>
+    <Footer>
+    <button onClick={()=> navigate("/cart")}></button>
+     </Footer>
     </React.Fragment>
   );
 }
@@ -86,6 +109,8 @@ background-color: #FFFFFF;
 height: 100%;
 
 `
+
+
 const Header = styled.div`
 background-color: #fdc500;
 height: 100px;
