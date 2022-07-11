@@ -6,7 +6,7 @@ export default function Footer({rota, validade, validarPagamento, texto, token})
     const navigate = useNavigate()
     function rotaPagamento(){
         if(rota === "/produtos"){
-            return  navigate("/carrinho")
+            return  navigate("/cart")
         }
         if(rota){
             navigate(rota);
