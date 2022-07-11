@@ -5,7 +5,7 @@ import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
 import { TokenContext } from '../context/TokenContext';
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer.js"
+import { Footer } from "../components/Footer/Footer";
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -16,7 +16,7 @@ import Footer from "../components/Footer.js"
         }
     if(selected){
     setSelected(false)
-    axios.put("http://localhost:5000/cart", body, header)
+    axios.put("https://hardstore0.herokuapp.com/cart", body, header)
           .then(response =>{
             console.log(response)
         })
@@ -24,7 +24,7 @@ import Footer from "../components/Footer.js"
     }else{
      setSelected(true)
     
-     axios.post("http://localhost:5000/cart", body, header)
+     axios.post("https://hardstore0.herokuapp.com/cart", body, header)
           .then(response =>{
       console.log(response)
   })
@@ -68,7 +68,7 @@ export default function Produtos(){
 
   useEffect(()=>{
 
-    axios.get("http://localhost:5000/produtos",header)
+    axios.get("https://hardstore0.herokuapp.com/produtos",header)
         .then(response =>{
           console.log(response)
           setProdutos(response.data)
@@ -97,9 +97,7 @@ export default function Produtos(){
         }))}
 
     </Container>
-    <Footer texto={`Ir para o carrinho`} rota={`/produtos`}>
-    
-     </Footer>
+    <Footer  rota="/carrinho" texto="Carrinho de Compras"/>
     </React.Fragment>
   );
 }

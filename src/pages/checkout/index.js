@@ -1,30 +1,41 @@
 //import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Pagamento from "./formaPagamento";
+import { useState, useEffect, useContext } from "react";
+import Pagamento from "./Pagamento";
 import { Content } from "./styles";
+import { TokenContext } from "../../context/TokenContext";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
+import { Footer } from "../../components/Footer/Footer";
+
 
 function Home() {
-  const [produto, setProduto] = useState();
-  const [valor, setValor] = useState();
-
+  const [validate, setValidate] = useState(false);
+  const [loadPay, setLoadPay] = useState(false);
+  const {token, header, valor} = useContext(TokenContext);
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    axios.get("https://hardstore0.herokuapp.com/produtos").then((response) => {
+    if(!token){
+      navigate("/")
+    }
+
+    (token && header)&& axios.get("https://hardstore0.herokuapp.com/cart", header).then((response) => {
       console.log(response);
-      setProduto(response.data.produtos);
-      setValor(response.data.valor);
     });
   }, []);
 
-  console.log("produtos", produto);
+  console.log("ROTA", loadPay)
 
-  if (produto && valor) {
+  
     return (
+      <>
       <Content>
-        <Pagamento/>
+        <Pagamento  valor={valor} pagamento={loadPay} validade={validate} validar={setValidate}/>
       </Content>
+      <Footer valor={valor} validade={validate} token={header} validarPagamento={setLoadPay} texto="Realizar Pagamento"/></>
+
     );
-  }
+  
 }
 
 export default Home;
