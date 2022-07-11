@@ -5,7 +5,7 @@ import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
 import { TokenContext } from '../context/TokenContext';
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer.js"
+import { Footer } from "../components/Footer/Footer";
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -97,9 +97,7 @@ export default function Produtos(){
         }))}
 
     </Container>
-    <Footer texto={`Ir para o carrinho`} rota={`/produtos`}>
-    
-     </Footer>
+    <Footer  rota="/carrinho" texto="Carrinho de Compras"/>
     </React.Fragment>
   );
 }

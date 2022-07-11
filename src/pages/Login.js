@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from '../context/TokenContext';
@@ -11,7 +11,7 @@ export default function Login(){
     const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
     const [disabled, setDisabled] = useState(false)
-    const {token, setToken} = useContext(TokenContext)
+    const {setToken} = useContext(TokenContext)
     const [botao, setBotao] = useState("Entrar")
     const [colorButton, setColorButton] = useState("#003f88");
     const [colorInput, setColorInput] = useState("black");
