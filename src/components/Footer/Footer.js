@@ -11,7 +11,7 @@ export function Footer({rota, validade, validarPagamento, texto, token}){
         }else if(validade){
             validarPagamento(true)
             alert("PAGAMENTO EFETUADO")
-            axios.post("https://hardstore0.herokuapp.com/compras",{}, token)
+            axios.post("http://localhost:5000/compras",{}, token)
                 .then(response =>{
                     console.log(response);
                     navigate("/produtos")
