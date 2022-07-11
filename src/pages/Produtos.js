@@ -16,7 +16,7 @@ import { Footer } from "../components/Footer/Footer";
         }
     if(selected){
     setSelected(false)
-    axios.put("https://hardstore0.herokuapp.com/cart", body, header)
+    axios.put("http://localhost:5000/cart", body, header)
           .then(response =>{
             console.log(response)
         })
@@ -24,7 +24,7 @@ import { Footer } from "../components/Footer/Footer";
     }else{
      setSelected(true)
     
-     axios.post("https://hardstore0.herokuapp.com/cart", body, header)
+     axios.post("http://localhost:5000/cart", body, header)
           .then(response =>{
       console.log(response)
   })
@@ -68,7 +68,7 @@ export default function Produtos(){
 
   useEffect(()=>{
 
-    axios.get("https://hardstore0.herokuapp.com/produtos",header)
+    axios.get("http://localhost:5000/produtos",header)
         .then(response =>{
           console.log(response)
           setProdutos(response.data)
