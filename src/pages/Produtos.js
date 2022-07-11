@@ -16,7 +16,7 @@ import Footer from "../components/Footer.js"
         }
     if(selected){
     setSelected(false)
-    axios.put("http://localhost:5000/cart", body, header)
+    axios.put("http://localhost:5000/deletecart", body, header)
           .then(response =>{
             console.log(response)
         })
