@@ -3,9 +3,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import imglogo from "../assets/imglogo.png"
-
-import { TokenContext } from "../context/TokenContext";
+import { TokenContext } from '../context/TokenContext';
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer.js"
 
  function Produto({item}){
     const [selected, setSelected] = useState(false)
@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
         }
     if(selected){
     setSelected(false)
-    axios.putg("http://localhost:5000/cart", body, header)
+    axios.put("http://localhost:5000/cart", body, header)
           .then(response =>{
             console.log(response)
         })
@@ -44,22 +44,35 @@ import { useNavigate } from "react-router-dom";
     )
 }
 export default function Produtos(){ 
-  const {header, token} = useContext(TokenContext);
-  console.log("SHAUSHAU", header)
   const [produtos, setProdutos] = useState();
-  const [valor, setValor] = useState();
-  const navigate = useNavigate();
+  const [pesquisa, setPesquisa] = useState();
+  const {token, header} = useContext(TokenContext)
+  const navigate = useNavigate()
+
+    function pesquisar(search){
+        if(search){
+         
+        let aux = produtos.filter(e=>{
+                const {nome, description} = e;
+                if((nome.toLowerCase()).includes(search) || (description.toLowerCase()).includes(search) ){
+                    return e;
+                }
+            })
+            setPesquisa(aux)
+        }else{
+            setPesquisa(produtos)
+        }
+        
+    }
+
 
   useEffect(()=>{
-    if(!token){
-      navigate("/")
-    }
 
     axios.get("http://localhost:5000/produtos",header)
         .then(response =>{
-          console.log(response.data)
-          setProdutos(response.data);
-          setValor(response.data.valor)
+          console.log(response)
+          setProdutos(response.data)
+          setPesquisa(response.data)
         })
   }, [])
 
@@ -73,18 +86,20 @@ export default function Produtos(){
     </div>
     <div>
     <ion-icon name="search-outline"></ion-icon>
-    <input></input>
+    <input onChange={e => pesquisar(e.target.value)}></input>
     </div>
      </Header>
     <Container>
-
-     {produtos?.map(((item, index)=>{
+     {pesquisa?.map(((item, index)=>{
       return ( 
         <Produto key={index} item = {item}>
         </Produto>)
         }))}
 
     </Container>
+    <Footer>
+    <button onClick={()=> navigate("/cart")}></button>
+     </Footer>
     </React.Fragment>
   );
 }
@@ -94,6 +109,8 @@ background-color: #FFFFFF;
 height: 100%;
 
 `
+
+
 const Header = styled.div`
 background-color: #fdc500;
 height: 100px;

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import { useState, useContext, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate, } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TokenContext } from '../context/TokenContext';
 import { ThreeDots } from 'react-loader-spinner';
 import imglogo from "../assets/imglogo.png"
